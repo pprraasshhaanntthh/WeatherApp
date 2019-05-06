@@ -18,3 +18,15 @@ steps:
     configuration: 'Release'
     xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+
+- script: /usr/local/bin/pod install
+  displayName: 'pod install using a script'
+
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+
+- task: CocoaPods@0
+  inputs:
+    forceRepoUpdate: true
+    projectDirectory: '$(system.defaultWorkingDirectory)'
+  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
