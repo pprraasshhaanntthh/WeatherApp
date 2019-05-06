@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import CoreLocation
+import AppCenterAnalytics
 
 class DaysForecastViewController: UITableViewController, CLLocationManagerDelegate {
     
@@ -35,6 +36,10 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
         locationManager.startUpdatingLocation()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationAuthStatus()
+    }
     
     /// to verify the loccation auth status
     func locationAuthStatus(){
@@ -53,12 +58,6 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager = manager
         // Only called when variable have location data
-        locationAuthStatus()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         locationAuthStatus()
     }
     
@@ -227,6 +226,7 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
     }
     
     @IBAction func updateForecastInDaysTVController(_ sender: Any) {
+        MSAnalytics.trackEvent("Day Forecast Refresh")
         daysWeak.removeAll()
         dayForecasts.removeAll()
         tableView.reloadData()

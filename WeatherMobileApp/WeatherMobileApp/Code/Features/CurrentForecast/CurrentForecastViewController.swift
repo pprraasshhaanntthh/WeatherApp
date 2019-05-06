@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import AppCenterAnalytics
 
 class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -134,6 +135,7 @@ class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate
     }
     
     @IBAction func updateCurrentForecast(_ sender: Any){
+        MSAnalytics.trackEvent("Current Status Refresh")
         self.viewDidLoad()
     }
 

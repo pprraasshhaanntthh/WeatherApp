@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Alamofire
+import AppCenterAnalytics
 
 class HourlyForecastViewController: UITableViewController, CLLocationManagerDelegate {
     
@@ -112,14 +113,10 @@ class HourlyForecastViewController: UITableViewController, CLLocationManagerDele
     }
     
     @IBAction func updateForecastInHourlyTVController(_ sender: Any) {
-        
-        print(hourlyForecasts.count)
+        MSAnalytics.trackEvent("Hourly Status Refresh")
         hourlyForecasts.removeAll()
-        print(hourlyForecasts.count)
         tableView.reloadData()
-        
         viewDidAppear(true)
-        print("reload tableViwe")
     }
 
 }
