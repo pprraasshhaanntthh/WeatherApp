@@ -29,6 +29,22 @@ class WeatherMobileAppUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+                let tabBarsQuery = app.tabBars
+        
+        tabBarsQuery.buttons["Hourly"].tap()
+        let refreshButton = app.navigationBars.buttons["Refresh"]
+        refreshButton.tap()
+        
+        tabBarsQuery.buttons[" Days"].tap()
+        let DaysrefreshButton = app.navigationBars.buttons["Refresh"]
+        DaysrefreshButton.tap()
+        
+        app.tabBars.buttons["Hourly"].tap()
+        let HourlyrefreshButton = app.navigationBars.buttons["Refresh"]
+        HourlyrefreshButton.tap()
     }
 
 }

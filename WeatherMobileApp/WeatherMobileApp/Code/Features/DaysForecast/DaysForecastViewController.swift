@@ -28,29 +28,23 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
         tableView.delegate = self
         tableView.dataSource = self
         
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startUpdatingLocation()
-
     }
     
-
+    
+    /// to verify the loccation auth status
     func locationAuthStatus(){
-        
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
-            
             Location.sharedInstance.latitude = currentLocation.coordinate.latitude
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
-            
             downloadHourlyForecastData {}
-            
             // MARK: Stop updating location
             locationManager.stopUpdatingLocation()
-            
         }else{
             print("non authorized DaysForecasrControll")
         }
@@ -58,9 +52,6 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager = manager
-        
-        //currentSityName.text = currentWeather.sityName
-        
         // Only called when variable have location data
         locationAuthStatus()
     }
@@ -80,7 +71,6 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
                     for obj in list{
                         self.dayForecast = DaysForecast(forecastDict:obj)
                         self.dayForecasts.append(self.dayForecast)
-                        
                     }
                     
                     var daySunday = [DaysForecast]()
@@ -237,7 +227,6 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
     }
     
     @IBAction func updateForecastInDaysTVController(_ sender: Any) {
-        
         daysWeak.removeAll()
         dayForecasts.removeAll()
         tableView.reloadData()
