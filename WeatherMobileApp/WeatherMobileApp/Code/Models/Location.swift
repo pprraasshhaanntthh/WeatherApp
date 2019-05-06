@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Ccan store the loction information for latitude and longtitude
 class Location{
     
     private var _latitude: Double!

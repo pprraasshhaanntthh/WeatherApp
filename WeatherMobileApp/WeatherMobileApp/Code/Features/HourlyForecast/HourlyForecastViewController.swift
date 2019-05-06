@@ -34,8 +34,13 @@ class HourlyForecastViewController: UITableViewController, CLLocationManagerDele
         locationManager.startUpdatingLocation()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationAuthStatus()
+    }
+    
+    /// to verify the loccation auth status
     func locationAuthStatus(){
-        
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
             
@@ -52,19 +57,15 @@ class HourlyForecastViewController: UITableViewController, CLLocationManagerDele
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        locationAuthStatus()
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager = manager
-        
         // Only called when variable have location data
         locationAuthStatus()
     }
     
+    /// To download &  parse the hourly forecast for the current location
+    ///
+    /// - Parameter completed: a closure gets called once the operation is completed
     func downloadHourlyForecastData(completed: @escaping DownloadComplete){
         Alamofire.request(HOURLY_WEATHER_URL, method: .get).responseJSON{ (responce) in
             
@@ -91,7 +92,7 @@ class HourlyForecastViewController: UITableViewController, CLLocationManagerDele
     
     func updateHourlyTVAfterChangeSettings(){
         hourlyForecasts.removeAll()
-        if hourlyForecasts.count == 0 { print("updated suckesuly") }
+        if hourlyForecasts.count == 0 { print("updated sucessfully") }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -112,6 +113,9 @@ class HourlyForecastViewController: UITableViewController, CLLocationManagerDele
         }
     }
     
+    /// to update the view when the refresh button is clicked
+    ///
+    /// - Parameter sender: event generated button
     @IBAction func updateForecastInHourlyTVController(_ sender: Any) {
         MSAnalytics.trackEvent("Hourly Status Refresh")
         hourlyForecasts.removeAll()

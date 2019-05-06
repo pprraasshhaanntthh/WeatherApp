@@ -12,8 +12,11 @@ import CoreData
 var settingsTable = [SettingsTable]()
 let context = CoreDataStack().persistentContainer.viewContext
 
+
+/// To perform the operations fror coredata such as save, delete or fetching container.
 class CoreDataStack{
     
+    /// to save the changes on view context for the coredata for storing data
     func save(){
         if context.hasChanges{
             do{
@@ -25,11 +28,15 @@ class CoreDataStack{
         }
     }
     
+    /// to delete a object in viewcontext for coredata
+    ///
+    /// - Parameter object: delete the object
     private func delete(_ object: NSManagedObject){
         context.delete(object)
         save()
     }
 
+    /// to delete the parameters in the setting table
     func deleteParameters(){
         let typeTemp = settingsTable
         for deletFerst in typeTemp{
@@ -37,7 +44,7 @@ class CoreDataStack{
         }
     }
     
-    // MARK: - Core Data stack
+    /// fetches the persistent container for the XCdatamodelId
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "WeatherMobileApp")
@@ -50,8 +57,7 @@ class CoreDataStack{
         return container
     }()
     
-    // MARK: - Core Data Saving support
-    
+    /// to save the changes on view context for the coredata for storing data
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

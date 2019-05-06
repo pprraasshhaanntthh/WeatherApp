@@ -13,6 +13,8 @@ import AppCenterAnalytics
 
 class DaysForecastViewController: UITableViewController, CLLocationManagerDelegate {
     
+    
+    /// Contains the days foreccast data
     var dayForecasts = [DaysForecast]()
     var daysWeak = [DaysForecast]()
     
@@ -47,9 +49,10 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
             currentLocation = locationManager.location
             Location.sharedInstance.latitude = currentLocation.coordinate.latitude
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
-            downloadHourlyForecastData {}
-            // MARK: Stop updating location
             locationManager.stopUpdatingLocation()
+            self.downloadDaysForecastData {
+            }
+            // MARK: Stop updating location
         }else{
             print("non authorized DaysForecasrControll")
         }
@@ -61,7 +64,10 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
         locationAuthStatus()
     }
     
-    func downloadHourlyForecastData(completed: @escaping DownloadComplete){
+    /// To download &  parse the Days forecast for the current location
+    ///
+    /// - Parameter completed: a closure gets called once the operation is completed
+    func downloadDaysForecastData(completed: @escaping DownloadComplete){
         Alamofire.request(FIVE_DAY_WEATHER_URL, method: .get).responseJSON{ (responce) in
             
             let result = responce.result
@@ -219,12 +225,17 @@ class DaysForecastViewController: UITableViewController, CLLocationManagerDelega
         }
     }
     
+    
+    /// to update the days once the settiings get changed
     func updateDaysTVAfterChangeSettings(){
         daysWeak.removeAll()
         dayForecasts.removeAll()
         if daysWeak.count == 0 && dayForecasts.count == 0{ print("updated successfully") }
     }
     
+    /// to update the view when the refresh button is clicked
+    ///
+    /// - Parameter sender: event generated button
     @IBAction func updateForecastInDaysTVController(_ sender: Any) {
         MSAnalytics.trackEvent("Day Forecast Refresh")
         daysWeak.removeAll()
