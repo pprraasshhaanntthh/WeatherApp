@@ -10,7 +10,6 @@ pool:
   vmImage: 'macOS-10.14'
 
 steps:
-
 - script: /usr/local/bin/pod install
   displayName: 'pod install using a script'
 
