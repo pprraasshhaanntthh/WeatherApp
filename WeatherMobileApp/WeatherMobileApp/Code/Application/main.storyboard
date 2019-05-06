@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9hU-Ln-xyW">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="2dF-CS-9t3">
+            <objects>
+                <tabBarController id="9hU-Ln-xyW" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lRE-Gd-Uo6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="3nU-bX-43A" kind="relationship" relationship="viewControllers" id="Myl-nA-Dzr"/>
+                        <segue destination="HHf-ey-EzK" kind="relationship" relationship="viewControllers" id="Eup-4j-xQu"/>
+                        <segue destination="z2K-SZ-pni" kind="relationship" relationship="viewControllers" id="VyT-5y-dY7"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lZh-sM-idY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-604" y="-409"/>
+        </scene>
+        <!--CurrentForecast-->
+        <scene sceneID="kkb-NZ-KtG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CurrentForecast" id="3nU-bX-43A" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Now" image="iconfinder_ic_now_widgets_48px_352571" id="VlB-TV-t2z"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="27e-CF-y73" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24" y="-735"/>
+        </scene>
+        <!--HourlyForecast-->
+        <scene sceneID="hpn-eQ-BpP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HourlyForecast" id="HHf-ey-EzK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Hourly" image="iconfinder_clock_time_alarm_watch_hour_3994342" id="w8C-Vb-d7e"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vJZ-fO-xO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="57" y="-690"/>
+        </scene>
+        <!--DaysForecast-->
+        <scene sceneID="VHq-Ca-rbg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DaysForecast" id="z2K-SZ-pni" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Days" image="iconfinder_weather-12_809988" id="66E-la-BDQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OMy-q2-Dr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="57" y="-644"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="iconfinder_clock_time_alarm_watch_hour_3994342" width="64" height="64"/>
+        <image name="iconfinder_ic_now_widgets_48px_352571" width="12" height="12"/>
+        <image name="iconfinder_weather-12_809988" width="64" height="64"/>
+    </resources>
+</document>
