@@ -12,7 +12,6 @@ import CoreData
 var settingsTable = [SettingsTable]()
 let context = CoreDataStack().persistentContainer.viewContext
 
-
 /// To perform the operations fror coredata such as save, delete or fetching container.
 class CoreDataStack{
     
@@ -21,7 +20,7 @@ class CoreDataStack{
         if context.hasChanges{
             do{
                 try context.save()
-                print("Save sacsesfully")
+                print("Save Sucessfully")
             }catch{
                 print("Fatal error: \(error.localizedDescription)")
             }
