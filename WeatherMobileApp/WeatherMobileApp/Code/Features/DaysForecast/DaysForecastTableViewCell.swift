@@ -10,6 +10,7 @@ import UIKit
 
 class DaysForecastTableViewCell: UITableViewCell {
     
+    /// day label to show the text for the week of this day
     @IBOutlet var day: UILabel!
     @IBOutlet var imageWeather: UIImageView!
     @IBOutlet var typeWeather: UILabel!
@@ -18,7 +19,10 @@ class DaysForecastTableViewCell: UITableViewCell {
     @IBOutlet var typeDegreeMax: UILabel!
     @IBOutlet var tupeDegreeMin: UILabel!
     
-    
+
+    /// to cconfigure/ mapping the cell content with DaysForecast object
+    ///
+    /// - Parameter daysForecast: contains details for the forecast
     func configureCell(daysForecast:DaysForecast){
         day.text = daysForecast.dayOfTheWeak
         imageWeather.image = UIImage(named: daysForecast.imageWeather)
@@ -28,16 +32,4 @@ class DaysForecastTableViewCell: UITableViewCell {
         typeDegreeMax.text = daysForecast.typeDegree
         tupeDegreeMin.text = daysForecast.typeDegree
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

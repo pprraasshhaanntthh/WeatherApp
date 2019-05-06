@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Alamofire
 @testable import WeatherMobileApp
 
 class WeatherMobileAppTests: XCTestCase {
@@ -28,6 +29,17 @@ class WeatherMobileAppTests: XCTestCase {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
+        }
+    }
+    
+    func test_whenHandlingSampleResponse_withNoErrors_thatForecastObjectReturned() {
+        Alamofire.request(CURRENT_WEATHER_URL, method:.get).responseJSON { (response) in
+            switch response.result {
+            case .failure(_):
+                XCTFail()
+            case .success(_):
+                return
+            }
         }
     }
 

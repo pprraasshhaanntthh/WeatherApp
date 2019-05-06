@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import AppCenterAnalytics
 
 class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -38,13 +39,11 @@ class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate
         // Do any additional setup after loading the view.
         
         currentWeather = CurrentWeather()
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startUpdatingLocation()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,23 +51,18 @@ class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate
         locationAuthStatus()
     }
     
+    /// to verify the loccation auth status
     func locationAuthStatus(){
-        
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
-            
             Location.sharedInstance.latitude = currentLocation.coordinate.latitude
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
-            
             currentWeather.downloadWeatherDetails {
                 self.currentWeatherToday()
             }
-            
-            // MARK: Stop updating location
             locationManager.stopUpdatingLocation()
-            
         }else{
-            
+            print("non authorized")
         }
     }
     
@@ -78,13 +72,15 @@ class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate
         locationAuthStatus()
     }
     
+    
+    /// Update tle labels on Current weather to labels
     func currentWeatherToday(){
         self.navigationItem.title = currentWeather.sityName
         sityTemperature.text = "\(currentWeather.currentTemperature)"
         imageWeather.image = UIImage(named: currentWeather.imageWeather)
         descriptionWeather.text = currentWeather.weatherType
         
-        precipitation(currentWeather.weatherType)
+        animateWeather(currentWeather.weatherType)
         
         maxTemperature.text = "\(currentWeather.maxWeatherTemperature)"
         minTemperature.text = "\(currentWeather.minWeatherTemperature)"
@@ -99,30 +95,13 @@ class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate
         
         visualTypeSpeed.text = globalValueTypeWindSpeed
         visualTypePressure.text = globalValueTypePressure
-        
     }
     
-    func precipitation(_ type: String){
-        switch type {
-        case "Snow":
-            setSnow(with: type)
-        case "Rain":
-            setRain(with: type)
-        default:
-            print("not snow and not rain")
-            return
-        }
-    }
     
-    func setSnow(with type: String){
-        emitterParams(type)
-    }
-    
-    func setRain(with type: String){
-        emitterParams(type)
-    }
-    
-    func emitterParams(_ type: String){
+    /// to animate the screen based on the weather usin the emitterr
+    ///
+    /// - Parameter type: to determine the type
+    func animateWeather(_ type: String){
         let emitter = Emitter.get(with: type)
         emitter.emitterPosition = CGPoint(x: view.frame.width/2, y: 0)
         emitter.emitterSize = CGSize(width: view.frame.width, height: 2)
@@ -133,7 +112,11 @@ class CurrentForecastViewController: UIViewController, CLLocationManagerDelegate
         self.viewDidLoad()
     }
     
+    /// to update the view when the refresh button is clicked
+    ///
+    /// - Parameter sender: event generated button
     @IBAction func updateCurrentForecast(_ sender: Any){
+        MSAnalytics.trackEvent("Current Status Refresh")
         self.viewDidLoad()
     }
 

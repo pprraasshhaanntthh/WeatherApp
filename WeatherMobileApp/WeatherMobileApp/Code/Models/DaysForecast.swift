@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Storage object for the weather information per day
 class DaysForecast {
     
     private var _dayOfTheWeak: String!

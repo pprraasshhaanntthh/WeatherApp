@@ -9,10 +9,9 @@
 import UIKit
 import Alamofire
 
+/// Storage object for the weather information for current
 class CurrentWeather{
-    
-    // MARK: Private weather parameters.
-    
+        
     private var _sityName: String!
     private var _imageWeather: String!
     private var _weatherType:String!

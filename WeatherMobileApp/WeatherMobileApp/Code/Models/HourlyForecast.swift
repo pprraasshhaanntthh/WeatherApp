@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Storage object for the weather information  per hour
 class HourlyForecast{
     
     private var _hourlyTimePeriod: String!
