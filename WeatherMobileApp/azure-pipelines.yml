@@ -7,21 +7,10 @@
 trigger:
   branches:
     include:
-      - 'Devops1'
-
-
+      - 'release/version/1.0'
 
 pool:
   vmImage: 'macos-latest'
-
-variables:
-  ProfileFilePath: 'MarketIntelligence/DevOps/MarketIntelligence_Adhoc.mobileprovision'
-  ProfileWidgetFilePath: 'MarketIntelligence/DevOps/MarketIntelligence_News_Widget_Adhoc.mobileprovision'
-  ProfileUUID: 'a7dc7745-56c3-4285-8d9c-4a4c0bdfa9e4'
-  CertificateFileName: 'spgmi_distribution.p12'
-  WorkspacePath: '**/MarketIntelligence.xcworkspace'
-  SchemaName: 'MarketIntelligence'
-  ExportOptionsFileName: 'MarketIntelligence/DevOps/ExportOptions.plist'
 
 steps:
 
@@ -30,7 +19,7 @@ steps:
   displayName: Checking the current directory
 
 - script: |
-        MarketIntelligence/BumpBuild.sh
+        ./BumpBuild.sh
   displayName: Bumping Build version
 
 
