@@ -1,0 +1,108 @@
+# Xcode
+# Build, test, and archive an Xcode workspace on macOS.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
+# Created By: Prashanth Vudanti
+
+trigger:
+  branches:
+    include:
+      - 'Devops1'
+
+
+
+pool:
+  vmImage: 'macos-latest'
+
+variables:
+  ProfileFilePath: 'MarketIntelligence/DevOps/MarketIntelligence_Adhoc.mobileprovision'
+  ProfileWidgetFilePath: 'MarketIntelligence/DevOps/MarketIntelligence_News_Widget_Adhoc.mobileprovision'
+  ProfileUUID: 'a7dc7745-56c3-4285-8d9c-4a4c0bdfa9e4'
+  CertificateFileName: 'spgmi_distribution.p12'
+  WorkspacePath: '**/MarketIntelligence.xcworkspace'
+  SchemaName: 'MarketIntelligence'
+  ExportOptionsFileName: 'MarketIntelligence/DevOps/ExportOptions.plist'
+
+steps:
+
+- script: pwd
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: Checking the current directory
+
+- script: |
+        MarketIntelligence/BumpBuild.sh
+  displayName: Bumping Build version
+
+
+# - task: InstallAppleCertificate@2
+#   inputs:
+#     certSecureFile: $(CertificateFileName)
+#     certPwd: 'spgmi2019'
+#     keychain: 'temp'
+
+# - task: InstallAppleCertificate@2
+#   inputs:
+#     certSecureFile: 'spgmi_development.p12'
+#     certPwd: 'spgmi2019'
+#     keychain: 'temp'
+
+# - task: InstallAppleProvisioningProfile@1
+#   inputs:
+#     provisioningProfileLocation: 'sourceRepository'
+#     provProfileSourceRepository: $(ProfileFilePath)
+
+# - task: InstallAppleProvisioningProfile@1
+#   inputs:
+#     provisioningProfileLocation: 'sourceRepository'
+#     provProfileSourceRepository: $(ProfileWidgetFilePath)
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       # Write your commands here
+#       chmod -R +x $(System.DefaultWorkingDirectory)
+
+# - task: InstallAppleProvisioningProfile@1
+#   inputs:
+#     provisioningProfileLocation: 'secureFiles'
+#     provProfileSecureFile: 'Market_Intelligence_Development.mobileprovision'
+
+# - task: InstallAppleProvisioningProfile@1
+#   inputs:
+#     provisioningProfileLocation: 'secureFiles'
+#     provProfileSecureFile: 'MarketIntelligence_News_Widget_dev.mobileprovision'
+
+# - task: Xcode@5
+#   inputs:
+#     actions: 'build'
+#     scheme: $(SchemaName)
+#     sdk: 'iphoneos'
+#     configuration: 'Release'
+#     xcWorkspacePath: $(WorkspacePath)
+#     # Options: 8, 9, 10, default, specifyPath
+#     xcodeVersion: 'default'
+#     # Options: nosign, default, manual, auto
+#     signingOption: 'default'
+#     provisioningProfileUuid: $(ProfileUUID)
+#     # # useXcpretty Makes it easier to diagnose build failures
+#     useXcpretty: false
+#     # Package the app
+#     packageApp: true
+#     exportOptions: 'plist'
+#     exportPath: '$(agent.buildDirectory)/output/'
+#     exportMethod: 'ad-hoc'
+#     exportOptionsPlist: $(ExportOptionsFileName)
+
+
+
+# - task: AppCenterDistribute@3
+#   inputs:
+#     serverEndpoint: 'spg-mimobile-ios-service-connetion'
+#     appSlug: 'S-P-Global-Market-Intelligence/TestCICDApp'
+#     appFile: '$(agent.buildDirectory)/output/*.ipa'
+#     # symbolsDsymFiles: 'dfsfgsdfsd'
+#     releaseNotesOption: 'input'
+#     releaseNotesInput: 'test'
+#     destinationType: 'groups'
+#     distributionGroupId: 'fc0eff77-f508-4385-b560-8ff53a47a7ed'

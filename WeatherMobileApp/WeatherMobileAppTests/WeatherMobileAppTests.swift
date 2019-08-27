@@ -34,12 +34,12 @@ class WeatherMobileAppTests: XCTestCase {
     
     func test_whenHandlingSampleResponse_withNoErrors_thatForecastObjectReturned() {
         Alamofire.request(CURRENT_WEATHER_URL, method:.get).responseJSON { (response) in
-            switch response.result {
-            case .failure(_):
-                XCTFail()
-            case .success(_):
-                return
-            }
+//            switch response.result {
+//            case .failure(_):
+                XCTAssert(false)
+//            case .success(_):
+//                return
+//            }
         }
     }
 
