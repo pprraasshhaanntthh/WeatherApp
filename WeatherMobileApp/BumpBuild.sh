@@ -7,9 +7,7 @@ WIDGET_TARGET="News Widget"
 
 echo pwd
 
-PROJECT_FILE=$(WeatherMobileApp.xcodeproj)
-
-# $(find . -d 1 -iname '*.xcodeproj')
+PROJECT_FILE=$(find . -d 1 -iname '*.xcodeproj')
 
 APP_PLIST=$(
     xcodebuild -project "$PROJECT_FILE" -target "$APP_TARGET" -showBuildSettings \
