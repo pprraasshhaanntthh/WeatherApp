@@ -19,7 +19,7 @@ steps:
   displayName: Checking the current directory
 
 - script: |
-        ./BumpBuild.sh
+        WeatherMobileApp/BumpBuild.sh
   displayName: Bumping Build version
 
 
