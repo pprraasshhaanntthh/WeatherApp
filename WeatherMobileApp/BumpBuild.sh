@@ -2,12 +2,12 @@
 
 set -Eeuo pipefail
 
-APP_TARGET="MarketIntelligence"
+APP_TARGET="WeatherMobileApp"
 WIDGET_TARGET="News Widget"
 
 echo pwd
 
-PROJECT_FILE='MarketIntelligence.xcodeproj'
+PROJECT_FILE='WeatherMobileApp.xcodeproj'
 
 # $(find . -d 1 -iname '*.xcodeproj')
 
