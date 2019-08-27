@@ -7,7 +7,7 @@ WIDGET_TARGET="News Widget"
 
 echo pwd
 
-PROJECT_FILE='WeatherMobileApp.xcodeproj'
+PROJECT_FILE=$(WeatherMobileApp/WeatherMobileApp.xcodeproj)
 
 # $(find . -d 1 -iname '*.xcodeproj')
 
