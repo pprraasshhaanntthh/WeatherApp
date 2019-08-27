@@ -5,9 +5,9 @@ set -Eeuo pipefail
 APP_TARGET="WeatherMobileApp"
 WIDGET_TARGET="News Widget"
 
-echo $(ls)
+cd WeatherMobileApp
 
-PROJECT_FILE=$(find . -d 1 -iname 'WeatherMobileApp/*.xcodeproj')
+PROJECT_FILE=$(find . -d 1 -iname '*.xcodeproj')
 
 APP_PLIST=$(
     xcodebuild -project "$PROJECT_FILE" -target "$APP_TARGET" -showBuildSettings \
