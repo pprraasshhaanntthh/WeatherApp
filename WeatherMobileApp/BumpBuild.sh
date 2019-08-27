@@ -5,7 +5,7 @@ set -Eeuo pipefail
 APP_TARGET="WeatherMobileApp"
 WIDGET_TARGET="News Widget"
 
-echo pwd
+echo $(ls)
 
 PROJECT_FILE=$(find . -d 1 -iname '*.xcodeproj')
 
