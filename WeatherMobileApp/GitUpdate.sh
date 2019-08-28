@@ -29,7 +29,7 @@ fi
 
 git add "$APP_PLIST"
 git commit -m"Info plist updated"
-git push
+git push origin HEAD:release/version/1.0
 
 echo "** INFO: Setting build number to $BUILD_BUILDID."
 exit 0
