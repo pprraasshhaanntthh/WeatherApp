@@ -27,7 +27,7 @@ echo "** ERROR: Unable to determine build number."
 exit -1
 fi
 
-git add
+git add "$APP_PLIST"
 git commit -m"Info plist updated"
 git push
 
