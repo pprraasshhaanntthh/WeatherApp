@@ -14,8 +14,8 @@ pool:
 
 steps:
 - checkout: self
-  clean: true
-  
+  persistCredentials: true
+
 - script: pwd
   workingDirectory: $(Build.SourcesDirectory)
   displayName: Checking the current directory
