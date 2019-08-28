@@ -22,6 +22,9 @@ steps:
         WeatherMobileApp/BumpBuild.sh
   displayName: Bumping Build version
 
+  - script: |
+          WeatherMobileApp/GitUpdate.sh
+    displayName: Updating the changes to git
 
 # - task: InstallAppleCertificate@2
 #   inputs:
